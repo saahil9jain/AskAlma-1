@@ -11,3 +11,7 @@ class QDetailView (generic.DetailView):
 
 def index(request):
 	return render(request, 'index.html')
+def listing(request):
+	return render(request, 'listing.html')
+def postquestion(request):
+	return render(request, 'post-question.html')

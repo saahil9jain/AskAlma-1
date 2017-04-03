@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,30 +9,30 @@
 	<meta name="author" content="ScriptsBundle">
 	<title>Knowledge Q&A Dashboard Template</title>
 	<!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="{% static "images/favicon.ico" %}"type="image/x-icon" />
 	<!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 	<!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{%static "css/style.css" %}">
 	<!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
-	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="{%static "css/font-awesome.css" %}">
 	<!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
-	<link rel="stylesheet" href="css/et-line-fonts.css">
+	<link rel="stylesheet" href="{%static "css/et-line-fonts.css" %}">
 	<!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
 	<!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
-	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-	<link rel="stylesheet" type="text/css" href="css/owl.style.css">
+	<link rel="stylesheet" type="text/css" href="{% static "css/owl.carousel.css"%}">
+	<link rel="stylesheet" type="text/css" href="{%static "css/owl.style.css"%}">
 	<!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
-	<link type="text/css" rel="stylesheet" href="css/styles/shCoreDefault.css" />
+	<link type="text/css" rel="stylesheet" href="{%static "css/styles/shCoreDefault.css"%}" />
     <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
-    <link type="text/css" rel="stylesheet" href="css/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="{%static "css/animate.min.css"%}" />
     <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap-dropdownhover.min.css" />
+    <link type="text/css" rel="stylesheet" href="{%static "css/bootstrap-dropdownhover.min.css"%}" />
 	<!-- JavaScripts -->
-	<script src="js/modernizr.js"></script>
+	<script src="{% static "js/modernizr.js"%}"></script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -59,7 +61,7 @@
 				<ul class="top-nav nav-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">
-							<img class="img-circle resize" alt="" src="images/authors/13.jpg">
+							<img class="img-circle resize" alt="" src="{% static "images/authors/13.jpg"%}">
 							<span class="hidden-xs small-padding">
 								<span>Umair</span>
 							 <i class="fa fa-caret-down"></i>
@@ -86,7 +88,7 @@
           <span class="icon-bar"></span>
         </button>
         <!-- logo -->
-        <a href="index.html" class="navbar-brand"><img class="img-responsive" alt="" src="images/logo.png">
+        <a href="index.html" class="navbar-brand"><img class="img-responsive" alt="" src="{% static "images/logo.png"%}">
         </a>
         <!-- header end -->
       </div>
@@ -152,7 +154,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
-													<img alt="" class="img-responsive center-block" src="images/authors/1.jpg">
+													<img alt="" class="img-responsive center-block" src="{% static "images/authors/1.jpg"%}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -181,7 +183,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="James John" href="#">
-													<img alt="" class=" correct img-responsive center-block" src="images/authors/2.jpg">
+													<img alt="" class=" correct img-responsive center-block" src="{% static "images/authors/2.jpg"%}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -210,7 +212,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Jessica" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/3.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/3.jpg"%}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -239,7 +241,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Muhammad Umair" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/4.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/4.jpg"%}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -270,7 +272,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/5.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/5.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -299,7 +301,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="James John" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/6.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/6.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -328,7 +330,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Jessica" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/7.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/7.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -357,7 +359,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Muhammad Umair" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/8.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/8.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -388,7 +390,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/9.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/9.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -417,7 +419,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="James John" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/10.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/10.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -446,7 +448,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Jessica" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/11.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/11.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -475,7 +477,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Muhammad Umair" href="#">
-													<img alt="" class="correct img-responsive center-block" src="images/authors/12.jpg">
+													<img alt="" class="correct img-responsive center-block" src="{% static "images/authors/12.jpg" %}">
 												</a> <span class="tick2"> <i class="fa fa-check" aria-hidden="true"></i> </span>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -506,7 +508,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/5.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/5.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -535,7 +537,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="James John" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/3.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/3.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -564,7 +566,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Jessica" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/7.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/7.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -593,7 +595,7 @@
 										<div class="row">
 											<div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
 												<a data-toggle="tooltip" data-placement="bottom" data-original-title="Muhammad Umair" href="#">
-													<img alt="" class=" img-responsive center-block" src="images/authors/12.jpg">
+													<img alt="" class=" img-responsive center-block" src="{% static "images/authors/12.jpg" %}">
 												</a>
 											</div>
 											<div class="col-md-7 col-sm-8  col-xs-12">
@@ -705,22 +707,22 @@
 						<ul>
 							<li class="social1">
 								<a title="" href="#">
-									<img alt="" src="images/facebook.png"> <span>Join Us On<strong>FACEBOOK</strong></span>
+									<img alt="" src="{% static "images/facebook.png" %}"> <span>Join Us On<strong>FACEBOOK</strong></span>
 								</a>
 							</li>
 							<li class="social2">
 								<a title="" href="#">
-									<img alt="" src="images/twitter.png"> <span>Join Us On<strong>TWIITER</strong></span>
+									<img alt="" src="{% static "images/twitter.png" %}"> <span>Join Us On<strong>TWIITER</strong></span>
 								</a>
 							</li>
 							<li class="social3">
 								<a title="" href="#">
-									<img alt="" src="images/google-plus.png"> <span>Join Us On<strong>GOOGLE PLUS</strong></span>
+									<img alt="" src="{% static "images/google-plus.png" %}"> <span>Join Us On<strong>GOOGLE PLUS</strong></span>
 								</a>
 							</li>
 							<li class="social4">
 								<a title="" href="#">
-									<img alt="" src="images/linkedin.png"> <span>Join Us On<strong>LINKED IN</strong></span>
+									<img alt="" src="{% static "images/linkedin.png" %}"> <span>Join Us On<strong>LINKED IN</strong></span>
 								</a>
 							</li>
 						</ul>
@@ -738,7 +740,7 @@
         <div class="row clearfix">
           <div class="col-md-8 col-md-offset-2">
             <div class="footer-content text-center no-padding margin-bottom-40">
-              <div class="logo-footer"><img id="logo-footer" class="center-block" src="images/logo.png" alt="">
+              <div class="logo-footer"><img id="logo-footer" class="center-block" src="{% static "images/logo.png" %}" alt="">
               </div>
               <p>The forum offers semi-anonymous functionality, which distinguishes it from other forums (such as Facebook). Any member of the Columbia community can ask questions and receive answers from others in the Columbia community, including students, professors, teaching assistants, and workers. Each post will be characterized by tags and also indicate the number of upvotes or downvotes.</p>
             </div>
@@ -759,30 +761,30 @@
     </div>
 
 	<!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= -->
-	<script src="js/jquery.min.js"></script>
+	<script src="{% static "js/jquery.min.js" %}"></script>
 	<!-- Bootstrap Core Css  -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="{% static "js/bootstrap.min.js" %}"></script>
 	<!-- Jquery Smooth Scroll  -->
-	<script src="js/jquery.smoothscroll.js"></script>
+	<script src="{% static "js/jquery.smoothscroll.js" %}"></script>
 	<!-- Jquery Easing -->
-	<script type="text/javascript" src="js/easing.js"></script>
+	<script type="{% static "text/javascript" src="js/easing.js" %}"></script>
 	<!-- Jquery Counter -->
-	<script src="js/jquery.countTo.js"></script>
+	<script src="{% static "js/jquery.countTo.js" %}"></script>
 	<!-- Jquery Waypoints -->
-	<script src="js/jquery.waypoints.js"></script>
+	<script src="{% static "js/jquery.waypoints.js" %}"></script>
 	<!-- Jquery Appear Plugin -->
-	<script src="js/jquery.appear.min.js"></script>
+	<script src="{% static "js/jquery.appear.min.js" %}"></script>
 	<!-- Carousel Slider  -->
-	<script src="js/carousel.min.js"></script>
+	<script src="{% static "js/carousel.min.js" %}"></script>
 	<!-- Jquery Parallex -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="{% static "js/jquery.stellar.min.js" %}"></script>
 	<!--Style Switcher -->
-	<script src="js/bootstrap-dropdownhover.min.js"></script>
+	<script src="{% static "js/bootstrap-dropdownhover.min.js" %}"></script>
 	<!-- Include jQuery Syntax Highlighter -->
-	<script type="text/javascript" src="scripts/shCore.js"></script>
-	<script type="text/javascript" src="scripts/shBrushPhp.js"></script>
+	<script type="text/javascript" src="{% static "scripts/shCore.js" %}"></script>
+	<script type="text/javascript" src="{% static "scripts/shBrushPhp.js" %}"></script>
 	<!-- Template Core JS -->
-	<script src="js/custom.js"></script>
+	<script src="{% static "js/custom.js" %}"></script>
 </body>
 
 </html>
