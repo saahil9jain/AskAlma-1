@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f2vv5b*l(q7i5n3uxe!rq(y1xkrq79i2=*9m)%ttjw#_@w@(u1'
+SOCIAL_AUTH_GOOGLE_KEY = '622159612356-s53cb6e27bjv8b367rpi060s265j8qen.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_SECRET = 'oKSAlZu_xkhdeWz_d9L5bF9A'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',  # <--
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -50,6 +53,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # <--
 ]
 
 ROOT_URLCONF = 'webapp.urls'
@@ -65,13 +69,19 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'webapp.wsgi.application'
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2'
+    'django.contrib.auth.backends.ModelBackend',
+)
 
+WSGI_APPLICATION = 'webapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -125,3 +135,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, "static")]
 #STATIC_ROOT = os.path.join(BASE_DIR, "static")
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'index'

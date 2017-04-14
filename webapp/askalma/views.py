@@ -3,7 +3,7 @@ from .models import *
 from django.views.generic import CreateView , UpdateView , DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 
 class QDetailView (generic.DetailView):
     #model = Question
@@ -11,7 +11,9 @@ class QDetailView (generic.DetailView):
 
 def index(request):
 	return render(request, 'askalma/index.html')
+
 #def listing(request):
 #	return render(request, 'askalma/listing.html')
+
 def postquestion(request):
 	return render(request, 'askalma/post-question.html')
