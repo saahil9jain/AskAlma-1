@@ -18,5 +18,6 @@ url(r'^profile/$', views.profile, name='profile'),
 url(r'^editprofile/(?P<user_id>[a-zA_Z0-9]+)/$', views.edit_profile ,name='edit_profile'),
 url(r'^logout$', views.logout ,name='logout'),
 url(r'^contactus$' , views.contactus , name="contactus"),
-url(r'^result' , views.result , name="result")
+url(r'^result' , views.result , name="result"),
+url(r'^question-detail' , views.qdetail , name="q_detail")
 ]

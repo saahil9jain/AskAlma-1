@@ -41,13 +41,13 @@ def profile (request):
 		, "lastname" : "Jazmati"
 	}
 	es.index('users','user', body=doc)'''
-	user_id = "hj2441"
-	result = es.search(index='users', body={"form" : 0 , "size" : 1 , "query": {"query_string" : { "query": user_id , "default_field": 'userid' }}})['hits']['hits'][0]
+	#user_id = "hj2441"
+	#result = es.search(index='users', body={"form" : 0 , "size" : 1 , "query": {"query_string" : { "query": user_id , "default_field": 'userid' }}})['hits']['hits'][0]
 
-	#return render(request, 'askalma/profile.html')
+	return render(request, 'askalma/profile.html')
 
 def edit_profile (request , user_id ):
-	_isLoggedIn(request)
+	#_isLoggedIn(request)
 	if (request.session['user_id'] !=  user_id):
 		render(request, 'askalma/404.html')
 	else:
@@ -70,3 +70,6 @@ def result (request):
 	# request.session['user_id'] = "hj2441@columbai.edu"
 	#last_in = datetime.datetime
 	return index(request)
+
+def qdetail(request):
+	return render(request, 'askalma/question_detail.html')
