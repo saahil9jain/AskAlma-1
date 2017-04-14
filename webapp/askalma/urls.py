@@ -9,6 +9,6 @@ from . import views
 app_name = 'askalma'
 urlpatterns = [
 url(r'^$', views.index, name='index'),
-url(r'listing', views.listing, name='listing'),
-url(r'post-question', views.listing, name='post-question'),
+#url(r'listing', views.listing, name='listing'),
+url(r'post-question', views.postquestion, name='post-question'),
 ]

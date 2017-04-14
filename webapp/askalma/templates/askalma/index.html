@@ -1,6 +1,7 @@
 {% extends 'askalma/headerfooter.html' %}
 {% block title %}Index{% endblock %}
 {% load staticfiles %}
+{% block body %}
 	<!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
 	<div class="full-section search-section">
 		<div class="search-area container">
@@ -588,37 +589,4 @@
 
 	</div>
 	<!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
-	<section id="social-media">
-		<div class="block no-padding">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="social-bar">
-						<ul>
-							<li class="social1">
-								<a title="" href="#">
-									<img alt="" src="{% static "askalma/images/facebook.png" %}"> <span>Join Us On<strong>FACEBOOK</strong></span>
-								</a>
-							</li>
-							<li class="social2">
-								<a title="" href="#">
-									<img alt="" src="{% static "askalma/images/twitter.png" %}"> <span>Join Us On<strong>TWIITER</strong></span>
-								</a>
-							</li>
-							<li class="social3">
-								<a title="" href="#">
-									<img alt="" src="{% static "askalma/images/google-plus.png" %}"> <span>Join Us On<strong>GOOGLE PLUS</strong></span>
-								</a>
-							</li>
-							<li class="social4">
-								<a title="" href="#">
-									<img alt="" src="{% static "askalma/images/linkedin.png" %}"> <span>Join Us On<strong>LINKED IN</strong></span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
+{% endblock %}

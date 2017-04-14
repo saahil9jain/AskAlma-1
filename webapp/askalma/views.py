@@ -6,12 +6,12 @@ from django.shortcuts import render
 
 
 class QDetailView (generic.DetailView):
-    model = Question
+    #model = Question
     template_name = "askalma/qdetail.html"
 
 def index(request):
 	return render(request, 'askalma/index.html')
-def listing(request):
-	return render(request, 'askalma/listing.html')
+#def listing(request):
+#	return render(request, 'askalma/listing.html')
 def postquestion(request):
 	return render(request, 'askalma/post-question.html')
