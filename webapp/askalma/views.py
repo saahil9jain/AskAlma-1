@@ -1,9 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import *
-import gdata
-from gdata import service.gdata.service
-import json
 from django.shortcuts import render
 import datetime
 from elasticsearch import Elasticsearch
@@ -73,4 +70,3 @@ def result (request):
 	# request.session['user_id'] = "hj2441@columbai.edu"
 	#last_in = datetime.datetime
 	return index(request)
-
