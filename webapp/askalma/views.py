@@ -31,8 +31,8 @@ def _isLoggedIn(request):
 
 
 def index(request):
-	#result = _isLoggedIn(request)
-	#if result != None: return result
+	result = _isLoggedIn(request)
+	if result != None: return result
 	return render(request, 'askalma/index.html')
 
 class QDetailView (generic.DetailView):
@@ -64,3 +64,6 @@ def logout(request):
 
 def contactus (request):
 	pass
+
+def result (request):
+	print request
