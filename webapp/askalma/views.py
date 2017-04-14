@@ -2,7 +2,7 @@ from django.views import generic
 from .models import *
 from django.views.generic import CreateView , UpdateView , DeleteView
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import datetime
 from elasticsearch import Elasticsearch
 
@@ -53,5 +53,11 @@ def edit_profile (request , user_id):
 		render(request , 'askalma/profile-setting.html')
 
 def logout(request):
-	del request.session['user_id']
+	try:
+		del request.session['user_id']
+	except:
+		pass
 	index(request)
+
+def contactus (request):
+	pass
