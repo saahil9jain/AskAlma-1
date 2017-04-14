@@ -66,4 +66,4 @@ def contactus (request):
 	pass
 
 def result (request):
-	print request
+	print(request)
