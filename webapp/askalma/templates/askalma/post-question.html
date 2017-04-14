@@ -1,5 +1,5 @@
 {% extends 'askalma/headerfooter.html' %}
-{% block title %}Post A Question{% endblock %}
+{% block title %}Post A Question - AskAlma{% endblock %}
 {% load staticfiles %}
 
 {% block body %}
@@ -12,7 +12,6 @@
             <div class="box-panel">
 
               <h2>Post Your Question</h2>
-              <p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. </p>
               <hr>
               <!-- form login -->
               <form class="margin-top-40">
@@ -23,11 +22,11 @@
                 <div class="form-group">
                   <label>Tags</label>
 
-                  <input type="text" id="tags" value="Php,Laravel,Bootstrap" class="form-control" data-role="tagsinput">
+                  <input type="text" id="tags" value="" class="form-control" data-role="tagsinput">
                 </div>
 
                 <div class="form-group">
-                  <label>Question Detials</label>
+                  <label>Question Details</label>
                   <textarea cols="12" rows="12" placeholder="Post Your Question Details Here....." id="message" name="message" class="form-control"></textarea>
                 </div>
 
