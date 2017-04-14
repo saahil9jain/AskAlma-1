@@ -53,7 +53,7 @@ body {
 	-webkit-text-size-adjust: 100%;
 	-webkit-overflow-scrolling: touch;
 	-webkit-font-smoothing: antialiased;
-	background: #eee url("../../askalma/static/askalma/images/darkgrain.png") repeat scroll 0 0;
+	background: #eee url("../images/darkgrain.png") repeat scroll 0 0;
 }
 a {
 	color: #be161e;
@@ -410,7 +410,7 @@ p {
 	margin: 0 auto;
 	background-position: center center;
 	transform: translateY(-50%);
-	background: url('../../askalma/static/askalma/images/preloader.gif') no-repeat;
+	background: url('../images/preloader.gif') no-repeat;
 }
 /* =-=-=-=-=-=-= Page Heading Area & Breadcrumb  =-=-=-=-=-=-= */
 .main-heading {
@@ -739,7 +739,7 @@ hr.main {
 }
 /* =-=-=-=-=-=-= Search Form =-=-=-=-=-=-= */
 .full-section.search-section {
-	background: #353b65 url("../../askalma/static/askalma/images/slider3.jpg") no-repeat scroll center top ;
+	background: #353b65 url("../images/slider3.jpg") no-repeat scroll center top ;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -749,7 +749,7 @@ hr.main {
 	padding: 70px 0;
 }
 .full-section.search-section-listing {
-	background: #353b65 url("../../askalma/static/askalma/images/slider3.jpg") no-repeat scroll center top;
+	background: #353b65 url("../images/slider3.jpg") no-repeat scroll center top;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -826,7 +826,7 @@ form.search-form input.search-btn:hover {
 /* =-=-=-=-=-=-= Parallax Settings  =-=-=-=-=-=-= */
 
 .full-section.parallax-home {
-	background: transparent url("../../askalma/static/askalma/images/slider3.jpg") center center no-repeat;
+	background: transparent url("../images/slider3.jpg") center center no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -997,7 +997,7 @@ form.search-form input.search-btn:hover {
 	margin-bottom: 25px;
 }
 .get-arrow::before {
-	background-image: url("../../askalma/static/askalma/images/arrow.png");
+	background-image: url("../images/arrow.png");
 	background-repeat: no-repeat;
 	content: "";
 	display: block;
@@ -1272,7 +1272,7 @@ img.resize {
 	margin-bottom: 4px;
 }
 #user-profile {
-	background-image: url("../../askalma/static/askalma/images/profile-bg.jpg");
+	background-image: url("../images/profile-bg.jpg");
 	min-height: 226px;
 	overflow: hidden;
 	position: relative;
@@ -1599,7 +1599,7 @@ img.resize {
 /* =-=-=-=-=-=-= Funfacts  =-=-=-=-=-=-= */
 
 .fun-facts-bg {
-	background: rgba(0, 0, 0, 0) url("../../askalma/static/askalma/images/facts-parallex.jpg") repeat scroll center top;
+	background: rgba(0, 0, 0, 0) url("../images/facts-parallex.jpg") repeat scroll center top;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2639,7 +2639,7 @@ img.full-bg {
 	color: #cdcdcd;
 }
 .testimonial-bg {
-	background: rgba(25, 25, 25, 0.8) url("../../askalma/static/askalma/images/testimonials.jpg") repeat fixed center top;
+	background: rgba(25, 25, 25, 0.8) url("../images/testimonials.jpg") repeat fixed center top;
 }
 .success-stories {
 	background: #be161e none repeat scroll 0 0;
@@ -2657,7 +2657,7 @@ img.full-bg {
 /* =-=-=-=-=-=-= Our APPS =-=-=-=-=-=-= */
 
 .our-apps {
-	background: rgba(0, 0, 0, 0) url("../../askalma/static/askalma/images/our-apps.jpg") no-repeat center center;
+	background: rgba(0, 0, 0, 0) url("../images/our-apps.jpg") no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -2967,7 +2967,7 @@ label {
 /* =-=-=-=-=-=-= Footer =-=-=-=-=-=-= */
 
 .footer-area {
-	background: #00BFFF url("../../askalma/static/askalma/images/footer.png") repeat-x scroll center bottom;
+	background: #00BFFF url("../images/footer.png") repeat-x scroll center bottom;
 	color: #c9c9c9;
 	font-family: 'Open Sans', sans-serif;
 	position: relative;
