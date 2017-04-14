@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f2vv5b*l(q7i5n3uxe!rq(y1xkrq79i2=*9m)%ttjw#_@w@(u1'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '622159612356-s53cb6e27bjv8b367rpi060s265j8qen.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'oKSAlZu_xkhdeWz_d9L5bF9A'
-SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS= {'hd' : 'columbia.edu', 'client_id': 'client_id,',}
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS= {'hd' : 'columbia.edu', }
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/error'
 SOCIAL_AUTH_BACKEND_ERROR_URL = '/error'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/result'
