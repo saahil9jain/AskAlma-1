@@ -10,8 +10,8 @@ class QDetailView (generic.DetailView):
     template_name = "askalma/qdetail.html"
 
 def index(request):
-	return render(request, 'index.html')
+	return render(request, 'askalma/index.html')
 def listing(request):
-	return render(request, 'listing.html')
+	return render(request, 'askalma/listing.html')
 def postquestion(request):
-	return render(request, 'post-question.html')
+	return render(request, 'askalma/post-question.html')
