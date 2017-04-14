@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import *
 from django.views.generic import CreateView , UpdateView , DeleteView
@@ -23,20 +24,15 @@ def _isLoggedIn(request):
 		user_id = request.session['user_id']
 		last_in = request.session['last_in']
 		if (last_in-datetime.time > 30000):
-			print("Not Logged In")
-			return
-		_oauth(request)
+			return HttpResponseRedirect(reverse('social:begin' ,args=('google-oauth2',)))
+		return None
 	except KeyError:
-		print("NOT LOGGED IN")
-		return
-
-def _oauth(request):
-	#Please add your authentication process here.
-	return
+		return HttpResponseRedirect(reverse('social:begin' ,args=('google-oauth2',)))
 
 
 def index(request):
-	_isLoggedIn(request)
+	#result = _isLoggedIn(request)
+	#if result != None: return result
 	return render(request, 'askalma/index.html')
 
 class QDetailView (generic.DetailView):
@@ -64,7 +60,7 @@ def logout(request):
 		del request.session['user_id']
 	except:
 		pass
-	index(request)
+	return index(request)
 
 def contactus (request):
 	pass
