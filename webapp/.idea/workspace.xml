@@ -42,8 +42,8 @@
       <file leaf-file-name="headerfooter.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="145">
+              <caret line="104" column="46" lean-forward="false" selection-start-line="104" selection-start-column="46" selection-end-line="104" selection-end-column="46" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#block#1;n#!!top" expanded="false" />
@@ -79,8 +79,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="591" column="0" lean-forward="false" selection-start-line="591" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
+            <state relative-caret-position="112">
+              <caret line="574" column="78" lean-forward="false" selection-start-line="574" selection-start-column="75" selection-end-line="574" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -89,8 +89,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/askalma/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+            <state relative-caret-position="135">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,8 +115,9 @@
       <find>facebook</find>
       <find>favicon</find>
       <find>load</find>
-      <find>modul</find>
       <find>listing</find>
+      <find>modul</find>
+      <find>index</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -128,11 +129,11 @@
         <option value="$PROJECT_DIR$/askalma/admin.py" />
         <option value="$PROJECT_DIR$/askalma/models.py" />
         <option value="$PROJECT_DIR$/webapp/settings.py" />
-        <option value="$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html" />
         <option value="$PROJECT_DIR$/askalma/views.py" />
-        <option value="$PROJECT_DIR$/askalma/urls.py" />
         <option value="$PROJECT_DIR$/askalma/templates/askalma/post-question.html" />
         <option value="$PROJECT_DIR$/askalma/templates/askalma/index.html" />
+        <option value="$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html" />
+        <option value="$PROJECT_DIR$/askalma/urls.py" />
       </list>
     </option>
   </component>
@@ -956,16 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-          <folding>
-            <element signature="e#695#736#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -981,16 +972,21 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html">
+    <entry file="file://$PROJECT_DIR$/webapp/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="345">
+          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#block#1;n#!!top" expanded="false" />
-            <element signature="n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#695#736#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/post-question.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1004,26 +1000,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/askalma/urls.py">
+    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-          <folding />
+        <state relative-caret-position="145">
+          <caret line="104" column="46" lean-forward="false" selection-start-line="104" selection-start-column="46" selection-end-line="104" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#block#1;n#!!top" expanded="false" />
+            <element signature="n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/post-question.html">
+    <entry file="file://$PROJECT_DIR$/askalma/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="135">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="591" column="0" lean-forward="false" selection-start-line="591" selection-start-column="0" selection-end-line="591" selection-end-column="0" />
+        <state relative-caret-position="112">
+          <caret line="574" column="78" lean-forward="false" selection-start-line="574" selection-start-column="75" selection-end-line="574" selection-end-column="78" />
           <folding />
         </state>
       </provider>
