@@ -4,12 +4,17 @@ from django.views.generic import CreateView , UpdateView , DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 import datetime
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
+				   use_ssl='true')
+
 
 def _isLoggedIn(request):
 	try:
-		userid = request.session['userid']
-		lastin = request.session['lastin']
-		if (lastin-datetime.time > 30000):
+		user_id = request.session['user_id']
+		last_in = request.session['last_in']
+		if (last_in-datetime.time > 30000):
 			print "Not Logged In"
 			return
 		_oauth(request)
@@ -28,10 +33,25 @@ def index(request):
 
 
 class QDetailView (generic.DetailView):
-    #model = Question
     template_name = "askalma/qdetail.html"
 
-#def listing(request):
-#	return render(request, 'askalma/listing.html')
+def listing(request):
+	return render(request, 'askalma/listing.html')
+
 def postquestion(request):
 	return render(request, 'askalma/post-question.html')
+
+def profile (request, user_id):
+	#GET DATA FROM ES.
+	return render(request, 'askalma/profile.html')
+
+def edit_profile (request , user_id):
+	_isLoggedIn(request)
+	if (request.session['user_id'] !=  user_id):
+		render(request, 'askalma/404.html')
+	else:
+		render(request , 'askalma/profile-setting.html')
+
+def logout(request):
+	del request.session['user_id']
+	index(request)
