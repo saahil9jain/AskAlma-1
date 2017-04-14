@@ -21,11 +21,11 @@ def _isLoggedIn(request):
 		user_id = request.session['user_id']
 		last_in = request.session['last_in']
 		if (last_in-datetime.time > 30000):
-			print "Not Logged In"
+			print("Not Logged In")
 			return
 		_oauth(request)
 	except KeyError:
-		print "NOT LOGGED IN"
+		print("NOT LOGGED IN")
 		return
 
 def _oauth(request):
