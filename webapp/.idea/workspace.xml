@@ -27,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/askalma/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="74" column="4" lean-forward="false" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
+            <state relative-caret-position="-536">
+              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -101,10 +101,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="question_detail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="question_detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/question_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
+            <state relative-caret-position="-2828">
               <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="70" />
               <folding />
             </state>
@@ -150,6 +150,7 @@
       <find>load</find>
       <find>Follow</find>
       <find>result</find>
+      <find>ima</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -167,8 +168,8 @@
         <option value="$PROJECT_DIR$/askalma/templates/askalma/headerfooter.html" />
         <option value="$PROJECT_DIR$/askalma/templates/askalma/404.html" />
         <option value="$PROJECT_DIR$/askalma/urls.py" />
-        <option value="$PROJECT_DIR$/askalma/views.py" />
         <option value="$PROJECT_DIR$/askalma/templates/askalma/question_detail.html" />
+        <option value="$PROJECT_DIR$/askalma/views.py" />
       </list>
     </option>
   </component>
@@ -1025,21 +1026,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/askalma/views.py">
+    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/question_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="74" column="4" lean-forward="false" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-2828">
+          <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/askalma/templates/askalma/question_detail.html">
+    <entry file="file://$PROJECT_DIR$/askalma/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="70" />
-          <folding />
+        <state relative-caret-position="-536">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

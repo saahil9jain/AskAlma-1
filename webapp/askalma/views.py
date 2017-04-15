@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import *
 from django.shortcuts import render
-import datetime
+import time
 from elasticsearch import Elasticsearch
 
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
@@ -13,8 +13,9 @@ def _isLoggedIn(request):
 	try:
 		user_id = request.session['user_id']
 		last_in = request.session['last_in']
-		if (last_in-datetime.datetime > 30000):
+		if (time.time()- last_in> 1800):
 			return HttpResponseRedirect(reverse('social:begin' ,args=('google-oauth2',)))
+		request.session['last_in'] = time.time()
 		return None
 	except KeyError:
 		return HttpResponseRedirect(reverse('social:begin' ,args=('google-oauth2',)))
