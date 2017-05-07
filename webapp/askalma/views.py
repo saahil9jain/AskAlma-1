@@ -105,6 +105,7 @@ def process_auth(details,strategy,request,**kwargs):
 	strategy.session_set('last_in', time.time())
 	strategy.session_set('first_name', details['first_name'])
 	strategy.session_set('last_name', details['last_name'])
+	strategy.session_set('last_name', details['last_name'])
 	#Check if they exist in ES. IF not, add them.
 	count = es.search(index='users', body={"size": 0,"query":{ "query_string": { "query": details['email'] , "default_field": 'email' }}})['hits']['total']
 	if count == 0:
@@ -112,7 +113,8 @@ def process_auth(details,strategy,request,**kwargs):
 			"email": details['email'],
 			"first_name" : details['first_name'],
 			"last_name": details['last_name'],
-			"headline" : "Student at Columbia University"
+			"headline" : "Student at Columbia University",
+			"profile_pic" : "default.jpg"
 		}
 		es.index(index="users", doc_type='user', body=doc)
 
