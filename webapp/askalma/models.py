@@ -1,11 +1,11 @@
-from __future__ import unicode_literals
-
-from django.db import models
-from django.core.urlresolvers import reverse
-
-# Create your models here.
+# from __future__ import unicode_literals
+#
+# from django.db import models
+# from django.core.urlresolvers import reverse
+#
 # class User (models.Model):
-#     email = models.CharField(max_length=32)
+#       email = models.CharField(max_length=64)
+#       username = models.CharField(max_length=32)
 #     firstname = models.CharField(max_length=64)
 #     lastname = models.CharField(max_length=64)
 
@@ -16,14 +16,3 @@ from django.core.urlresolvers import reverse
 #         return reverse("askalma:qdetail" , kwargs={'pk':self.pk} )
 
 
-# class Question (models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     is_anonymous =  models.BooleanField ()
-#     title = models.CharField (max_length=128)
-#     body = models.TextField()
-
-
-#     def __str__(self):
-#         return self.user.firstname + " " +  self.user.lastname + " - " + self.title
-
-#GUYS: username: admin password: askalma123
