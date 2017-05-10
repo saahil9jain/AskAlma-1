@@ -28,11 +28,10 @@
 
                 <div class="form-group">
                   <label>Question Details</label>
-                  <textarea cols="12" rows="12" placeholder="Post Your Question Details Here....." id="message" name="message" class="form-control"></textarea>
+                  <textarea cols="12" rows="12" placeholder="Post Your Question Details Here....." id="details" name="message" class="form-control"></textarea>
                 </div>
 
                 <button class="btn btn-primary pull-right" onclick="collect()" name= "action" value= "Senddata">Publish Your Question</button>
-
               </form>
               <!-- form login -->
 
@@ -88,9 +87,9 @@
   <script type= "text/javascript">
     function collect()
     {
-      var title= document.getElementById("title");
-      var tags= document.getElementById("tags");
-      var details= document.getElementById("message");
+      var title= document.getElementById("title").value;
+      var tags= document.getElementById("tags").value;
+      var details= document.getElementById("details").value;
       $.ajax({ // use ajax to pass the obtained value from searchbox
       url : "/post-question/",
       method : "POST",

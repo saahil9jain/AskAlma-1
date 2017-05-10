@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views import generic
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -44,31 +44,64 @@ class QDetailView (generic.DetailView):
 
 def listing(request):
 	context = {}
+	response= searchquestion(request)
+	print response
+	if response.get('questions')== "nothing": return response
 	return render(request, 'askalma/listing.html' , context = context)
+
+def searchquestion(request):
+	try:
+		print "taking questions from elasticsearch"
+		result=es.search(index='questions', body={"from" : 0, "size" : 1000})
+		questions= result['hits']['hits']
+		print questions
+		b= []
+		for question in questions:
+			print question
+			tags= question['_source']['tags']
+			taglist= [s.strip() for s in tags.split(',')]
+			a = {
+			"title": question['_source']['title'],
+			"taglist": taglist,
+			"details": question['_source']["details"]
+			}
+			b.append(a)
+		print b
+		return JsonResponse({'questions': b })
+	except KeyError:
+		return JsonResponse({'questions': "nothing"})
 
 def postquestion(request):
 	print ("inside HTML page")
+	print request
 	result = pullquestion(request)
-	if result== "data": print "Added to ES"
-	return render(request, 'askalma/post-question.html')
+	if result== "data":
+		print "Added to ES"
+		return render(request, 'askalma/listing.html')
+	else:
+		return render(request, 'askalma/post-question.html')
 
 def pullquestion(request):
 	try:
-		print "inside ES function"
+		print "sending question to elasticsearch"
 		title= str(request.GET.get("title", ' '))
+		print title
 		tags= str(request.GET.get("tags", ' '))
+		print tags
 		details= str(request.GET.get("details", ' '))
+		print details
 		print "inside es working"
 		doc = {
 			"title": title,
 			"tags": tags,
 			"details": details
 		}
-		es.index(index="post-question", doc_type='question', body=doc)
+		print doc
+		es.index(index="questions", doc_type='question', body=doc)
 		return HttpResponseRedirect("data")
 	except KeyError:
 		return HttpResponseRedirect("webpage")
- 
+
 def profile (request):
 	result = _isLoggedIn(request)
 	if result != None: return result
