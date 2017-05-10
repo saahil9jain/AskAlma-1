@@ -47,8 +47,28 @@ def listing(request):
 	return render(request, 'askalma/listing.html' , context = context)
 
 def postquestion(request):
+	print ("inside HTML page")
+	result = pullquestion(request)
+	if result== "data": print "Added to ES"
 	return render(request, 'askalma/post-question.html')
 
+def pullquestion(request):
+	try:
+		print "inside ES function"
+		title= str(request.GET.get("title", ' '))
+		tags= str(request.GET.get("tags", ' '))
+		details= str(request.GET.get("details", ' '))
+		print "inside es working"
+		doc = {
+			"title": title,
+			"tags": tags,
+			"details": details
+		}
+		es.index(index="post-question", doc_type='question', body=doc)
+		return HttpResponseRedirect("data")
+	except KeyError:
+		return HttpResponseRedirect("webpage")
+ 
 def profile (request):
 	result = _isLoggedIn(request)
 	if result != None: return result
