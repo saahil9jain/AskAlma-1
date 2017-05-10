@@ -1,10 +1,12 @@
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views import generic
+from django.template import RequestContext
 from django.urls import reverse
 from django.shortcuts import redirect
 from .models import *
 from django.shortcuts import render
 import time
+from django.views.decorators.csrf import csrf_exempt
 from elasticsearch import Elasticsearch
 from urlparse import urlparse
 import gdata.client
@@ -71,7 +73,10 @@ def searchquestion(request):
 	except KeyError:
 		return JsonResponse({'questions': "nothing"})
 
+@csrf_exempt
 def postquestion(request):
+	print "in postquestion"
+	print request
 	print ("inside HTML page")
 	print request
 	result = pullquestion(request)

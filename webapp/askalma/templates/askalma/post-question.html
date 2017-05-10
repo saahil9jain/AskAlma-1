@@ -92,7 +92,7 @@
       var details= document.getElementById("details").value;
       $.ajax({ // use ajax to pass the obtained value from searchbox
       url : "/post-question/",
-      method : "POST",
+      method : "GET",
       dataType: "json",
       data: {
       title: title,
