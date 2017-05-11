@@ -10,7 +10,6 @@ sentimentOutput = nlu.analyze(text='What is the best course in Columbia computer
 print(sentimentOutput)
 # #{'sentiment': {'document': {'label': 'neutral', 'score': 0.0}}, 'language': 'en'}
 
-
 # # CATEGORIES FOR QUESTIONS
 # # CAN THEN GROUP SIMILAR QUESTIONS
 categoryOutput = nlu.analyze(text='What is the best course in Columbia computer science?',
