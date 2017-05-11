@@ -44,9 +44,14 @@ def index(request):
 	#	return result
 	return render(request, 'askalma/index.html', context=context)
 
+def search(request):
+	context = {}
+	response = getquestions(request)
+	if response.get('questions')!= "nothing": return render(request, 'askalma/index.html', context=context)
+	return render(request, 'askalma/listing.html' , context = context)
 
 def getquestions(request):
-	searchstring= str(request.GET.get('searchstring', ' '))
+	searchstring= str(request.GET.get('querystring', ' '))
 	print searchstring
 	try:
 		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{ "query_string": { "query": searchstring, "default_field": 'title' }}})
@@ -62,7 +67,6 @@ def getquestions(request):
 			"details": question['_source']["details"]
 			}
 			b.append(a)
-		print b
 		return JsonResponse({'questions': b })
 	except KeyError:
 		return JsonResponse({'questions': "nothing"})

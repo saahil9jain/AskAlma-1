@@ -7,9 +7,9 @@
 		<div class="search-area container">
 			<h3 class="search-title">Have A Question? Search Ask Alma!</h3>
 			<p class="search-tag-line">If you have any question you can ask above or enter what you are looking for!</p>
-			<form autocomplete="off" method="get" class="search-form clearfix" id="search-form">
-				<input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off" id="querystring">
-				<input type="submit" value="Search" class="search-btn" onclick="searchquestion()" name= "action" value= "Senddata">
+			<form autocomplete="off" action='search' method='get' class="search-form clearfix" id="search-form">
+				<input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off" id="querystring" name="querystring">
+				<input type="submit" value="Search" class="search-btn" onclick="searchquestion()" value= "Senddata">
 			</form>
 		</div>
 	</div>
