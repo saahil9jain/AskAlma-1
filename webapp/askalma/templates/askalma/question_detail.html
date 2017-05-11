@@ -17,11 +17,12 @@
             <div class="listing-grid ">
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <h3><a  href="#"> Bootstrap fixed sidebar causes main content to overlap ? </a></h3>
+                  <h3><a  href="#" id="title"> Bootstrap fixed sidebar causes main content to overlap ? </a></h3>
                   <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>8 mintes ago</span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> 750 Views</span> </div>
-                </div>
+                  <div id= "details">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <p> I am a novice when it comes to Bootstrap and css in general. I would like a site with a fixed sidebar, fixed top nav and main content that scrolls. </p>
+                  <p > I am a novice when it comes to Bootstrap and css in general. I would like a site with a fixed sidebar, fixed top nav and main content that scrolls. </p>
+                </div>
                   <p>The navbar is fixed and works ok. The layout of the sidebar and main content is fine too. The problem comes when I set the sidebar to fixed. The main content overlaps the sidebar.</p>
                   <p>I am using a basic grid layout:</p>
                   <strong>Html Structure</strong>
@@ -45,7 +46,8 @@
  								</pre>
                   <p> I have tried adding a margin to the left of the main content to push it over but it looks horrible when resized to smaller device. </p>
                   <p>What is the correct way to achieve a fixed sidebar whilst still maintaining responsiveness? </p>
-                  <div class="tagcloud"> <a href="">html</a> <a href="">css</a> <a href="">bootstrap</a> </div>
+                </div>
+                  <div class="tagcloud"> <a href="" id="t1">html</a> <a href="" id="t2">css</a> <a href="" id="t3">bootstrap</a> </div>
                 </div>
               </div>
             </div>
@@ -74,13 +76,13 @@
                     <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
                   </div>
                   <p>I think this is what you are looking for. You need to remove the <code>float: left</code> from the inner nav to center it and make it a inline-block.</p>
-                  <pre class="brush: php syntaxhighlight">     
+                  <pre class="brush: php syntaxhighlight">
                         .navbar .navbar-nav {
                           display: inline-block;
                           float: none;
                           vertical-align: top;
                         }
-                        
+
                         .navbar .navbar-collapse {
                           text-align: center;
                         }
@@ -93,7 +95,7 @@
                                 float: none;
                                 vertical-align: top;
                             }
-                        
+
                             .navbar .navbar-collapse {
                                 text-align: center;
                             }
@@ -130,7 +132,7 @@ $('#nav').affix({
       offset: {
         top: $('header').height()
       }
-}); 
+});
                                 </pre>
                   <div class="pad-ver pull-right">
 
@@ -181,10 +183,10 @@ $(function(){
               <form>
                 <div class="form-group">
                   <label>Post Your Answer</label>
-                  <textarea cols="12" rows="7" class="form-control" placeholder="I Have The Aswert"></textarea>
+                  <textarea cols="12" rows="7" class="form-control" placeholder="I Have The Answer" id= "answer_text"></textarea>
                 </div>
 
-                <button class="btn btn-primary btn-lg btn-block">Post Your Answer</button>
+                <button class="btn btn-primary btn-lg btn-block" id= "answer_button" onclick=submitf()>Post Your Answer</button>
 
               </form>
 
@@ -277,4 +279,33 @@ $(function(){
     <!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
   </div>
   <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+  <script type="text/javascript">
+  function submitf()
+  {
+    var ans= document.getElementById("answer_text").value;
+    var question= document.getElementById("title").value;
+      $.ajax({ // use ajax to pass the obtained value from searchbox
+    url : "/question-detail/",
+    method : "GET",
+    dataType: "json",
+    data: {
+    answer_text :ans,
+    question_text:question
+    },
+    success: function (result)
+    if (result== "sucess")
+    {
+      windows.location.href= "listing.html";
+    }
+    else
+    {
+      windows.location.href= "post-question.html";
+    }
+    error: function (textStatus, errorThrown)
+    {
+      console.log("Text status "+textStatus+" Error is "+errorThrown);
+    }
+    });
+  }
+</script>
 {%  endblock %}

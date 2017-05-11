@@ -41,6 +41,10 @@ def index(request):
 	context['stats'] = _getStats()
 	return render(request, 'askalma/index.html', context=context)
 
+
+#def getanswers(request):
+
+
 class QDetailView (generic.DetailView):
     template_name = "askalma/qdetail.html"
 
@@ -55,13 +59,11 @@ def listing(request):
 
 def searchquestion(request):
 	try:
-		print "taking questions from elasticsearch"
+		#print "taking questions from elasticsearch"
 		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
 		print result
-		#elastic= "http://search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com/questions/_search?q="
-		#result= requests.get(elastic+ )
 		questions= result['hits']['hits']
-		print questions
+		#print questions
 		b= []
 		for question in questions:
 			print question
@@ -73,7 +75,7 @@ def searchquestion(request):
 			"details": question['_source']["details"]
 			}
 			b.append(a)
-		print b
+		#print b
 		return JsonResponse({'questions': b })
 	except KeyError:
 		return JsonResponse({'questions': "nothing"})
@@ -140,12 +142,56 @@ def logout(request):
 def contactus (request):
 	pass
 
-
+@csrf_exempt
 def qdetail(request):
 	context = {}
-	return render(request, 'askalma/question_detail.html', context = context)
+	print "request"
+	result= getanswers(request)
+	print result
+	if result== "data":
+		print "Successfully added data to ES"
+		return render(request, 'askalma/listing.html')
+	else:
+		return render(request, 'askalma/question_detail.html')
+	#return render(request, 'askalma/question_detail.html', context = context)
 
 
+def getanswers(request):
+	try:
+		print "reached here"
+		#result = _isLoggedIn(request)
+		#if result != None: return result
+		print request
+		answer_text= str(request.GET.get("answer_text"))
+		print answer_text #can't find answer_text
+		question_text= str(request.GET.get("question_text"))
+		body={"from" : 0, "size" : 1000, "query":{"match_all": {}}}
+		questions= es.search(index="questions1", body={"from" : 0, "size" : 1000, "query":{"query_string": {"query": question_text, "default_field": "title"}}})
+		question= questions["hits"]["hits"]
+		print question #can't find question either
+		question_id= 0
+		user_id= 0
+		for q in question:
+			question_id= q.get("_id")
+		print "this is question id"
+		print question_id #question_id is 0
+		user_profile =_get_user_profile (request.session['email'])
+		user_email= user_profile['email']
+		user= es.search(index='users', body={"from" : 0, "size": 1000, "query":{ "query_string": {"query": user_email, "default_field": "email"}}})["hits"]["hits"]
+		#count = es.search(index='users', body={"size": 0, "query":{ "query_string": { "query": details['email'] , "default_field": 'email' }}})['hits']['total']
+		for u in user:
+			user_id= u.get("_id")
+		doc = {
+			"answer_text":answer_text,
+			"user_id": user_id,
+			"question_id": question_id
+		}
+		print doc
+		if answer_text!=" ":
+			es.index(index="answers", doc_type='answer', body=doc)
+		return HttpResponseRedirect("data")
+	except KeyError:
+		return HttpResponseRedirect("webpage")
 #JUST UNCOMMENT the two lines
 def _getStats ():
 	stats = {}
