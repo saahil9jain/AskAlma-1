@@ -47,7 +47,7 @@ def index(request):
 def search(request):
 	context = {}
 	response = getquestions(request)
-	if response.get('questions')!= "nothing": return render(request, 'askalma/index.html', context=context)
+	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
 	return render(request, 'askalma/listing.html' , context = context)
 
 def getquestions(request):
@@ -59,14 +59,15 @@ def getquestions(request):
 		print result
 		b=[]
 		for q in result:
-			tags= question['_source']['tags']
+			tags= q['_source']['tags']
 			taglist= [s.strip() for s in tags.split(',')]
 			a = {
-			"title": question['_source']['title'],
+			"title": q['_source']['title'],
 			"taglist": taglist,
-			"details": question['_source']["details"]
+			"details": q['_source']["details"]
 			}
 			b.append(a)
+			print(b)
 		return JsonResponse({'questions': b })
 	except KeyError:
 		return JsonResponse({'questions': "nothing"})
