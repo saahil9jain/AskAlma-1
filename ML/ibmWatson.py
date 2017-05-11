@@ -1,0 +1,2 @@
+from watson_developer_cloud import AlchemyLanguageV1
+alchemyapi = AlchemyLanguageV1(api_key='bb4bc7f058004c73d08b9983fc76e84af3701e0f')
