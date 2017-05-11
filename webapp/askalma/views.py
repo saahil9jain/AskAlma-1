@@ -32,18 +32,40 @@ def _isLoggedIn(request):
 	except KeyError:
 		return HttpResponseRedirect(reverse('social:begin' ,args=('google-oauth2',)))
 
-
+@csrf_exempt
 def index(request):
 	#Add these two lines to any page that requires user to be logged in
 	result = _isLoggedIn(request)
 	if result != None: return result
+	result= getquestions(request)
 	context = {}
 	context['stats'] = _getStats()
+	#if result.get('question')!="nothing":
+	#	return result
 	return render(request, 'askalma/index.html', context=context)
 
 
-#def getanswers(request):
-
+def getquestions(request):
+	searchstring= str(request.GET.get('searchstring', ' '))
+	print searchstring
+	try:
+		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{ "query_string": { "query": searchstring, "default_field": 'title' }}})
+		result=result['hits']['hits']
+		print result
+		b=[]
+		for q in result:
+			tags= question['_source']['tags']
+			taglist= [s.strip() for s in tags.split(',')]
+			a = {
+			"title": question['_source']['title'],
+			"taglist": taglist,
+			"details": question['_source']["details"]
+			}
+			b.append(a)
+		print b
+		return JsonResponse({'questions': b })
+	except KeyError:
+		return JsonResponse({'questions': "nothing"})
 
 class QDetailView (generic.DetailView):
     template_name = "askalma/qdetail.html"
@@ -53,7 +75,7 @@ def listing(request):
 	#print request
 	response= searchquestion(request)
 	#print response
-	if response.get('questions')== "nothing": return response
+	if response.get('questions')!= "nothing": return response
 	return render(request, 'askalma/listing.html' , context = context)
 
 

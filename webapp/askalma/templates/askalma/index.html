@@ -8,8 +8,8 @@
 			<h3 class="search-title">Have A Question? Search Ask Alma!</h3>
 			<p class="search-tag-line">If you have any question you can ask above or enter what you are looking for!</p>
 			<form autocomplete="off" method="get" class="search-form clearfix" id="search-form">
-				<input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off">
-				<input type="submit" value="Search" class="search-btn">
+				<input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off" id="querystring">
+				<input type="submit" value="Search" class="search-btn" onclick="searchquestion()" name= "action" value= "Senddata">
 			</form>
 		</div>
 	</div>
@@ -55,8 +55,8 @@
 											<div class="col-md-3 col-sm-2 col-xs-12">
 												<ul class="question-statistic">
 													<li class="active"> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Answers"><span>2</span></a>
-													</li>
 													<li> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>0</span></a>
+													</li>
 													</li>
 												</ul>
 											</div>
@@ -587,6 +587,34 @@
 		</div>
 		<!-- =-=-=-=-=-=-= SEPARATOR END =-=-=-=-=-=-= -->
 
-	</div>
+	<script type= "text/javascript">
+	function searchquestion()
+	{
+		var query= document.getElementById("querystring").value;
+		$.ajax({ // use ajax to pass the obtained value from searchbox
+	url : "/index/",
+	method : "GET",
+	dataType: "json",
+	data: {
+		searchstring: query
+	},
+	success: function (result)
+	{
+		if (result== "success")
+		{
+			windows.location.href= "listing.html";
+		}
+		else
+		{
+			windows.location.href= "index.html";
+		}
+	},
+	error: function (textStatus, errorThrown)
+	{
+		console.log("Text status "+textStatus+" Error is "+errorThrown);
+	}
+	});
+	}
+	</script>
 	<!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
 {% endblock %}
