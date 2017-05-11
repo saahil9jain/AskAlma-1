@@ -7,14 +7,13 @@ from gensim.models import word2vec
 # Skip Gram Neural Network
 # Train on text8 (Wikipedia dump): 253,855 unique words, 17,005,208 total words
 
-# sentences = [['first', 'sentence'], ['second', 'sentence']]
 # sentences = word2vec.Text8Corpus('text8')
 # model = word2vec.Word2Vec(sentences, size=200)
 # model.save("WordVecModel")
 model = word2vec.Word2Vec.load("WordVecModel")
 
 # Can use for recommended tags / good
-print(model.most_similar(['animal']))
+print(model.most_similar(['technology']))
 
 # Can use for similarity detection among questions / Not that accurate
 print(model.similarity('technology', 'computer'))
