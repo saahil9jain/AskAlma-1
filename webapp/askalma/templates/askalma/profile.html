@@ -19,8 +19,8 @@
 							{% static profile_pic %}
 							{% endwith %}"></span>
                     <div class="profile-name">
-                      <h3>{{ user_info.first_name }} {{ user_info.last_name }}</h3>
-                      <i>{{ user_info.headline }}</i>
+                      <h3>{{ request.session.first_name }} {{ request.session.last_name }}</h3>
+                      <i>{{ request.session.headline }}</i>
                     </div>
                   </div>
                 </div>
