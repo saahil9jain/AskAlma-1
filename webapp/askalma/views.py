@@ -50,9 +50,9 @@ class QDetailView (generic.DetailView):
 
 def listing(request):
 	context = {}
-	print request
+	#print request
 	response= searchquestion(request)
-	print response
+	#print response
 	if response.get('questions')== "nothing": return response
 	return render(request, 'askalma/listing.html' , context = context)
 
@@ -61,12 +61,12 @@ def searchquestion(request):
 	try:
 		#print "taking questions from elasticsearch"
 		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
-		print result
+		#print result
 		questions= result['hits']['hits']
 		#print questions
 		b= []
 		for question in questions:
-			print question
+			#print question
 			tags= question['_source']['tags']
 			taglist= [s.strip() for s in tags.split(',')]
 			a = {
@@ -82,33 +82,33 @@ def searchquestion(request):
 
 @csrf_exempt
 def postquestion(request):
-	print "in postquestion"
-	print request
-	print ("inside HTML page")
-	print request
+	#print "in postquestion"
+	#print request
+	#print ("inside HTML page")
+	#print request
 	result = pullquestion(request)
 	if result== "data":
-		print "Added to ES"
+		#print "Added to ES"
 		return render(request, 'askalma/listing.html')
 	else:
 		return render(request, 'askalma/post-question.html')
 
 def pullquestion(request):
 	try:
-		print "sending question to elasticsearch"
+		#print "sending question to elasticsearch"
 		title= str(request.GET.get("title", ' '))
-		print title
+		#print title
 		tags= str(request.GET.get("tags", ' '))
-		print tags
+		#print tags
 		details= str(request.GET.get("details", ' '))
-		print details
-		print "inside es working"
+		#print details
+		#print "inside es working"
 		doc = {
 			"title": title,
 			"tags": tags,
 			"details": details
 		}
-		print doc
+		#print doc
 		if title!=" ":
 			es.index(index="questions1", doc_type='question', body=doc)
 		return HttpResponseRedirect("data")
@@ -121,7 +121,7 @@ def profile (request):
 
 	user_info = _get_user_profile (request.session['email'])
 	context = {'user_info' : user_info}
-	print context
+	#print context
 	return render(request, 'askalma/profile.html' , context)
 
 def edit_profile (request ):
@@ -145,11 +145,11 @@ def contactus (request):
 @csrf_exempt
 def qdetail(request):
 	context = {}
-	print "request"
+	#print "request"
 	result= getanswers(request)
-	print result
+	#print result
 	if result== "data":
-		print "Successfully added data to ES"
+		#print "Successfully added data to ES"
 		return render(request, 'askalma/listing.html')
 	else:
 		return render(request, 'askalma/question_detail.html')
@@ -158,27 +158,16 @@ def qdetail(request):
 
 def getanswers(request):
 	try:
-		print "reached here"
-		#result = _isLoggedIn(request)
-		#if result != None: return result
-		print request
-		answer_text= str(request.GET.get("answer_text"))
-		print answer_text #can't find answer_text
-		question_text= str(request.GET.get("question_text"))
-		body={"from" : 0, "size" : 1000, "query":{"match_all": {}}}
-		questions= es.search(index="questions1", body={"from" : 0, "size" : 1000, "query":{"query_string": {"query": question_text, "default_field": "title"}}})
-		question= questions["hits"]["hits"]
-		print question #can't find question either
-		question_id= 0
-		user_id= 0
+		answer_text= str(request.GET.get("answer_text", ' ')) #getting answer_text
+		question_text= str(request.GET.get("question_text", ' '))
+		question= es.search(index="questions1", body={"from" : 0, "size" : 1000, "query":{"query_string": {"query": question_text, "default_field": "title"}}})["hits"]["hits"]
+		question_id= " "
+		user_id= " "
 		for q in question:
 			question_id= q.get("_id")
-		print "this is question id"
-		print question_id #question_id is 0
 		user_profile =_get_user_profile (request.session['email'])
 		user_email= user_profile['email']
 		user= es.search(index='users', body={"from" : 0, "size": 1000, "query":{ "query_string": {"query": user_email, "default_field": "email"}}})["hits"]["hits"]
-		#count = es.search(index='users', body={"size": 0, "query":{ "query_string": { "query": details['email'] , "default_field": 'email' }}})['hits']['total']
 		for u in user:
 			user_id= u.get("_id")
 		doc = {
@@ -186,9 +175,8 @@ def getanswers(request):
 			"user_id": user_id,
 			"question_id": question_id
 		}
-		print doc
 		if answer_text!=" ":
-			es.index(index="answers", doc_type='answer', body=doc)
+			es.index(index='answers', doc_type='answer', body=doc)
 		return HttpResponseRedirect("data")
 	except KeyError:
 		return HttpResponseRedirect("webpage")
@@ -230,5 +218,5 @@ def process_auth(details,strategy,request,**kwargs):
 def _get_user_profile (email):
 	res = es.search(index='users', body={"from": 0, "size": 1, "query": {
 		"query_string": {"query": email, "default_field": 'email'}}})
-	print res
+	#print res
 	return res['hits']['hits'][0]['_source']

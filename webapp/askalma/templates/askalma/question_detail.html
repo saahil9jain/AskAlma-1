@@ -17,7 +17,9 @@
             <div class="listing-grid ">
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <h3><a  href="#" id="title"> Bootstrap fixed sidebar causes main content to overlap ? </a></h3>
+                  <div id="title" >
+                  <h3><a  href="#"> Bootstrap fixed sidebar causes main content to overlap ? </a></h3>
+                </div>
                   <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>8 mintes ago</span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> 750 Views</span> </div>
                   <div id= "details">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -293,14 +295,16 @@ $(function(){
     question_text:question
     },
     success: function (result)
-    if (result== "sucess")
     {
-      windows.location.href= "listing.html";
-    }
-    else
-    {
-      windows.location.href= "post-question.html";
-    }
+      if (result== "sucess")
+      {
+        windows.location.href= "listing.html";
+      }
+      else
+      {
+        windows.location.href= "question-detail.html";
+      }
+    },
     error: function (textStatus, errorThrown)
     {
       console.log("Text status "+textStatus+" Error is "+errorThrown);
