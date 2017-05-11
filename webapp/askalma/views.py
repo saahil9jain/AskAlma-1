@@ -46,15 +46,20 @@ class QDetailView (generic.DetailView):
 
 def listing(request):
 	context = {}
+	print request
 	response= searchquestion(request)
 	print response
 	if response.get('questions')== "nothing": return response
 	return render(request, 'askalma/listing.html' , context = context)
 
+
 def searchquestion(request):
 	try:
 		print "taking questions from elasticsearch"
-		result=es.search(index='questions', body={"from" : 0, "size" : 1000})
+		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
+		print result
+		#elastic= "http://search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com/questions/_search?q="
+		#result= requests.get(elastic+ )
 		questions= result['hits']['hits']
 		print questions
 		b= []
@@ -102,7 +107,8 @@ def pullquestion(request):
 			"details": details
 		}
 		print doc
-		es.index(index="questions", doc_type='question', body=doc)
+		if title!=" ":
+			es.index(index="questions1", doc_type='question', body=doc)
 		return HttpResponseRedirect("data")
 	except KeyError:
 		return HttpResponseRedirect("webpage")
@@ -169,7 +175,6 @@ def process_auth(details,strategy,request,**kwargs):
 	if count == 0:
 		doc = {
 			"email": details['email'],
-			"first_name" : details['first_name'],
 			"last_name": details['last_name'],
 			"headline" : "Student at Columbia University",
 			"profile_pic" : "default.jpg"
