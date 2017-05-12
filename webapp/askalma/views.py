@@ -88,34 +88,33 @@ def getquestions(request):
 def listing(request):
 	result = _isLoggedIn(request)
 	if result != None: return result
-	# sentimentOutput = nlu.analyze(text=question['_source']['title'], features=[features.Sentiment()])
-	# sentiment = sentimentOutput['sentiment']['document']['label']
 	response = searchquestion(request)
 	print(response)
 	return render(request, 'askalma/listing.html'  , context = response)
 
 def searchquestion(request):
-	try:
-		#print "taking questions from elasticsearch"
-		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
-		#print result
-		questions= result['hits']['hits']
+    try:
+        result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
+        print result
+        questions= result['hits']['hits']
 		#print questions
-		b= []
-		for question in questions:
-			#print question
-			tags= question['_source']['tags']
-			taglist= [s.strip() for s in tags.split(',')]
-			a = {
+        b= []
+        for question in questions:
+            tags= question['_source']['tags']
+            taglist= [s.strip() for s in tags.split(',')]
+            sentimentOutput = nlu.analyze(text=question['_source']['title'], features=[features.Sentiment()])
+            sentiment = sentimentOutput['sentiment']['document']['label']
+            a = {
 			"title": question['_source']['title'],
 			"taglist": taglist,
 			"details": question['_source']["details"],
-			"qid" : question['_id']
+			"qid" : question['_id'],
+            "sentiment": sentiment
 			}
-			b.append(a)
-		#print b
-		return {'questions': b }
-	except KeyError:
+            b.append(a)
+        print b
+        return {'questions': b }
+    except KeyError:
 		return {'questions': "nothing"}
 
 @csrf_exempt
@@ -145,7 +144,7 @@ def pullquestion(request):
 					tags = categoryOutput['categories'][0]['label']
 			keywordOutput = nlu.analyze(text=title, features=[features.Keywords()])
 			if len(keywordOutput['keywords']) != 0:
-				tags = tags + ", " + keywordOutput['keywords'][0]['text']				
+				tags = tags + ", " + keywordOutput['keywords'][0]['text']
 			conceptOutput = nlu.analyze(text=title, features=[features.Concepts()])
 			if len(conceptOutput['concepts']) != 0:
 				tags = tags + ", " + conceptOutput['concepts'][0]['text']
@@ -247,9 +246,9 @@ def _getStats ():
 	stats = {}
 	stats['views'] = 7812
 	stats['questions'] = es.search(index='questions1', body={"size": 0,})['hits']['total']
-	# stats['answersed_questions'] = es.search(index='questions', body={"size": 0,"query":{ "query_string": { "query": 1, "default_field": 'answered' }}})['hits']['total']
+	stats['answersed_questions'] = es.search(index='questions1', body={"size": 0,"query":{ "query_string": { "query": 1, "default_field": 'answered' }}})['hits']['total']
 	stats['users'] =  es.search(index='users', body={"size": 0,})['hits']['total']
-	stats['answered_questions'] = 147
+	stats['answered_questions'] = 24
 
 	return stats
 
