@@ -18,8 +18,9 @@ url(r'^listing', views.listing, name='listing'),
 url(r'^post-question', views.postquestion, name='post_question'),
 url(r'^profile/$', views.profile, name='profile'),
 url(r'^editprofile/$', views.edit_profile ,name='edit_profile'),
-url(r'^logout$', views.logout ,name='logout'),
-url(r'^contactus$' , views.contactus , name="contactus"),
-url(r'^question-detail' , views.qdetail , name="q_detail"),
-url(r'^error' , views.autherror , name="error")
+url(r'^logout/$', views.logout ,name='logout'),
+url(r'^contactus/$' , views.contactus , name="contactus"),
+url(r'^question-detail/(?P<qid>([a-zA-Z0-9])*)/$' , views.qdetail , name="q_detail"),
+url(r'^iindex$' , views.iindex , name="iindex"),
+url(r'^submit_answer$' , views.submit_answer , name='submit_answer')
 ]

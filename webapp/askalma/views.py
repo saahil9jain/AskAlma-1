@@ -12,9 +12,9 @@ from urlparse import urlparse
 import gdata.client
 import gdata.gauth
 import json
-from wordVectorClassifier import machineLearning
+# from wordVectorClassifier import machineLearning
 import gdata.photos.service #In this example where contacting Google Picasa Web API
-from gensim.models import word2vec
+# from gensim.models import word2vec
 
 
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
@@ -74,16 +74,11 @@ def getquestions(request):
 	except KeyError:
 		return JsonResponse({'questions': "nothing"})
 
-class QDetailView (generic.DetailView):
-    template_name = "askalma/qdetail.html"
-
 def listing(request):
-	context = {}
-	#print request
+	result = _isLoggedIn(request)
+	if result != None: return result
 	response= searchquestion(request)
-	#print response
-	if response.get('questions')!= "nothing": return response
-	return render(request, 'askalma/listing.html' , context = context)
+	return render(request, 'askalma/listing.html'  , context = response)
 
 
 def searchquestion(request):
@@ -101,23 +96,19 @@ def searchquestion(request):
 			a = {
 			"title": question['_source']['title'],
 			"taglist": taglist,
-			"details": question['_source']["details"]
+			"details": question['_source']["details"],
+			"qid" : question['_id']
 			}
 			b.append(a)
 		#print b
-		return JsonResponse({'questions': b })
+		return {'questions': b }
 	except KeyError:
-		return JsonResponse({'questions': "nothing"})
+		return {'questions': "nothing"}
 
 @csrf_exempt
 def postquestion(request):
-	#print "in postquestion"
-	#print request
-	#print ("inside HTML page")
-	#print request
 	result = pullquestion(request)
 	if result== "data":
-		#print "Added to ES"
 		return render(request, 'askalma/listing.html')
 	else:
 		return render(request, 'askalma/post-question.html')
@@ -180,56 +171,32 @@ def contactus (request):
 	pass
 
 @csrf_exempt
-def qdetail(request):
-	context = {}
-	#print "request"
-	result= getanswers(request)
-	#print result
-	if result== "data":
-		#print "Successfully added data to ES"
-		return render(request, 'askalma/listing.html')
-	else:
-		return render(request, 'askalma/question_detail.html')
-	#return render(request, 'askalma/question_detail.html', context = context)
+def qdetail(request, qid):
+	# ADD LOGIN
+	context = _get_question_details (qid)
+	return render(request, 'askalma/question_detail.html' , context = context)
 
 
-def getanswers(request):
-	try:
-		answer_text= str(request.GET.get("answer_text", ' ')) #getting answer_text
-		question_text= str(request.GET.get("question_text", ' '))
-		question= es.search(index="questions1", body={"from" : 0, "size" : 1000, "query":{"query_string": {"query": question_text, "default_field": "title"}}})["hits"]["hits"]
-		question_id= " "
-		user_id= " "
-		for q in question:
-			question_id= q.get("_id")
-		user_profile =_get_user_profile (request.session['email'])
-		user_email= user_profile['email']
-		user= es.search(index='users', body={"from" : 0, "size": 1000, "query":{ "query_string": {"query": user_email, "default_field": "email"}}})["hits"]["hits"]
-		for u in user:
-			user_id= u.get("_id")
-		doc = {
-			"answer_text":answer_text,
-			"user_id": user_id,
-			"question_id": question_id
-		}
-		if answer_text!=" ":
-			es.index(index='answers', doc_type='answer', body=doc)
-		return HttpResponseRedirect("data")
-	except KeyError:
-		return HttpResponseRedirect("webpage")
+def _get_question_details( qid):
+	query = es.get(index="questions1", doc_type='question' , id=qid)
+	question = query ['_source']
+	question['id']  = query['_id']
+	#answers = es.search ("doc is query for questions = qid ")
+	answers = None
+	return {'question' : question , 'answers' : answers}
+
 #JUST UNCOMMENT the two lines
 def _getStats ():
 	stats = {}
 	stats['views'] = 7812
-	#stats['questions'] = es.search(index='questions', body={"size": 0,})['hits']['total']
+	stats['questions'] = es.search(index='questions1', body={"size": 0,})['hits']['total']
 	# stats['answersed_questions'] = es.search(index='questions', body={"size": 0,"query":{ "query_string": { "query": 1, "default_field": 'answered' }}})['hits']['total']
 	stats['users'] =  es.search(index='users', body={"size": 0,})['hits']['total']
-	stats['questions'] = 232
 	stats['answered_questions'] = 147
 
 	return stats
 
-def autherror(request):
+def iindex(request):
 	#While this should an error page, it seems that it is nothing too serious, just redirect to index
 	return index(request)
 
@@ -255,8 +222,7 @@ def process_auth(details,strategy,request,**kwargs):
 def _get_user_profile (email):
 	res = es.search(index='users', body={"from": 0, "size": 1, "query": {
 		"query_string": {"query": email, "default_field": 'email'}}})
-	#print res
-	return res['hits']['hits'][0]['_source']
+	return res['hits']['hits'][0]['_source'], res['hits']['hits'][0]['_id']
 
 def interest(request):
 	context = {}
@@ -281,3 +247,18 @@ def getinterests(request):
 		return JsonResponse({'interests': recommendations })
 	except KeyError:
 		return JsonResponse({'interests': "nothing"})
+
+@csrf_exempt
+def submit_answer(request):
+	answer_text= str(request.POST.get("answer", None)) #getting answer_text
+	question_id= str(request.POST.get("qid", None)) #getting answer_text
+	profile, user_id = _get_user_profile (request.session['email'])
+
+	if answer_text!= None:
+		doc = {
+			"answer_text":answer_text,
+			"user_id": user_id,
+			"question_id": question_id
+		}
+		es.index(index='answers3', doc_type='answer', body=doc)
+		return HttpResponseRedirect('question-detail/%s'%question_id)
