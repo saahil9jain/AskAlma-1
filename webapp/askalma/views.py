@@ -174,14 +174,15 @@ def profile(request):
 	if result != None: return result
 	#print user_info
 	#print context
-	context = {}
-	return render(request, 'askalma/profile.html' , context=context)
+	user_info, x =_get_user_profile (request.session['email'])
+	context = {'user_info' : user_info}
+	return render(request , 'askalma/profile-setting.html', context= context)
 
 def edit_profile (request ):
 	result = _isLoggedIn(request)
 	if result != None: return result
 
-	user_info =_get_user_profile (request.session['email'])
+	user_info, x =_get_user_profile (request.session['email'])
 	context = {'user_info' : user_info}
 	return render(request , 'askalma/profile-setting.html', context= context)
 
