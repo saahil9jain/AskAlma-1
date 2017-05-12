@@ -77,7 +77,7 @@ def getquestions(request):
 			}
 			b.append(a)
 			print(b)
-		return {'questions': b }	
+		return {'questions': b }
 	except KeyError:
 		return {'questions': "nothing"}
 
@@ -181,6 +181,7 @@ def contactus (request):
 def qdetail(request, qid):
 	# ADD LOGIN
 	context = _get_question_details (qid)
+	print context
 	return render(request, 'askalma/question_detail.html' , context = context)
 
 
@@ -189,8 +190,17 @@ def _get_question_details( qid):
 	question = query ['_source']
 	question['id']  = query['_id']
 	#answers = es.search ("doc is query for questions = qid ")
+	answers= es.search(index='answers3', body={"from" : 0, "size" : 1000,"query":{ "query_string": { "query": question['id'] , "default_field": 'question_id' }}})
+	answers=answers['hits']['hits']
+	b=[]
+	for answer in answers:
+		source = answer.get('_source')
+		a={}
+		a['answer_text'] = source.get('answer_text')
+		a['user_id'] = source.get('user_id')
+		b.append(a)
 	answers = None
-	return {'question' : question , 'answers' : answers}
+	return {'question' : question , 'answers' : b}
 
 #JUST UNCOMMENT the two lines
 def _getStats ():
