@@ -21,7 +21,6 @@ nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(version='2017-05-11'
                                                             username='92475337-a51a-47f2-b42e-69e772b1e3cc',
                                                             password='NdHjAGCYDeOf')
 
-
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
 				   use_ssl='true')
 
@@ -131,7 +130,6 @@ def pullquestion(request):
 		title= str(request.GET.get("title", ' '))
 		#print title
 		tags= str(request.GET.get("tags", ' '))
-		print("tags!!!!!!!!!!!!!!a;ldkfjasdf" + " " + tags)
 		#print tags
 		details= str(request.GET.get("details", ' '))
 
@@ -174,9 +172,10 @@ def pullquestion(request):
 def profile (request):
 	result = _isLoggedIn(request)
 	if result != None: return result
-
-	user_info = _get_user_profile (request.session['email'])
-	context = {'user_info' : user_info}
+	context= {}
+	#user_info = _get_user_profile (request.session['email'])
+	#print user_info
+	#context = {'user_info' : user_info}
 	#print context
 	return render(request, 'askalma/profile.html' , context)
 
@@ -210,8 +209,15 @@ def _get_question_details( qid):
 	query = es.get(index="questions1", doc_type='question' , id=qid)
 	question = query ['_source']
 	question['id']  = query['_id']
+	tags= question['tags']
+	taglist= [s.strip() for s in tags.split(',')]
+	print taglist
+	print "first tag"
+	print taglist[0]
+	print "second tag"
 	#answers = es.search ("doc is query for questions = qid ")
 	answers= es.search(index='answers3', body={"from" : 0, "size" : 1000,"query":{ "query_string": { "query": question['id'] , "default_field": 'question_id' }}})
+	print answers
 	answers=answers['hits']['hits']
 	b=[]
 	for answer in answers:
@@ -219,9 +225,21 @@ def _get_question_details( qid):
 		a={}
 		a['answer_text'] = source.get('answer_text')
 		a['user_id'] = source.get('user_id')
+		users= es.search(index= 'users',body={"from" : 0, "size" : 1000,"query":{"match_all": {}}})["hits"]["hits"]
+		#result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
+		print "This are users"
+		print users
+		for user in users:
+			id= user.get('_id')
+			if a['user_id']==id:
+				source1 = user.get('_source')
+				a['firstname']= source1.get('firstname')
+				a['lastname']= source1.get('lastname')
 		b.append(a)
-	answers = None
-	return {'question' : question , 'answers' : b}
+	print ("This are the answers and users")
+	print b
+	#answers = None
+	return {'question' : question , 'answers' : b, 'taglist': taglist}
 
 #JUST UNCOMMENT the two lines
 def _getStats ():
