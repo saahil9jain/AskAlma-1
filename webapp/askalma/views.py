@@ -88,7 +88,9 @@ def getquestions(request):
 def listing(request):
 	result = _isLoggedIn(request)
 	if result != None: return result
-	response= searchquestion(request)
+	# sentimentOutput = nlu.analyze(text=question['_source']['title'], features=[features.Sentiment()])
+	# sentiment = sentimentOutput['sentiment']['document']['label']
+	response = searchquestion(request)
 	print(response)
 	return render(request, 'askalma/listing.html'  , context = response)
 
