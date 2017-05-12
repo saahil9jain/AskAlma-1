@@ -3,13 +3,26 @@
 {% load staticfiles %}
 {% block body %}
 	<!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
-	<div class="full-section search-section">
+		<div class="full-section search-section">
 		<div class="search-area container">
 			<h3 class="search-title">Have A Question? Search Ask Alma!</h3>
 			<p class="search-tag-line">If you have any question you can ask above or enter what you are looking for!</p>
 			<form autocomplete="off" action='search' method='get' class="search-form clearfix" id="search-form">
 				<input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off" id="querystring" name="querystring">
 				<input type="submit" value="Search" class="search-btn" onclick="searchquestion()" value= "Senddata">
+			</form>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="full-section search-section">
+		<div class="search-area container">
+			<h3 class="search-title">Need a new interest / topic to check out? Ask us!</h3>
+			<p class="search-tag-line">Enter one of your favorite topics. We'll give you some more topics to check out !</p>
+			<form autocomplete="off" action='interest' method='get' class="search-form clearfix" id="search-form">
+				<input type="text" title="* Please enter an interest / topic" placeholder="Type your interest / topic here" class="search-term " autocomplete="off" id="querystring" name="querystring">
+				<input type="submit" value="Search" class="search-btn" onclick="searchinterest()" value= "Senddata">
 			</form>
 		</div>
 	</div>

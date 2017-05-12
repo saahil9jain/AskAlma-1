@@ -13,6 +13,7 @@ urlpatterns = [
 url(r'^$', views.index, name='index'),
 url(r'^index$', views.index, name='index'),
 url(r'^search', views.search, name='search'),
+url(r'^interest', views.interest, name='interest'),
 url(r'^listing', views.listing, name='listing'),
 url(r'^post-question', views.postquestion, name='post_question'),
 url(r'^profile/$', views.profile, name='profile'),

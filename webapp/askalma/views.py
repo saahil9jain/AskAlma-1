@@ -12,8 +12,9 @@ from urlparse import urlparse
 import gdata.client
 import gdata.gauth
 import json
+from wordVectorClassifier import machineLearning
 import gdata.photos.service #In this example where contacting Google Picasa Web API
-
+from gensim.models import word2vec
 
 
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
@@ -48,7 +49,8 @@ def search(request):
 	context = {}
 	response = getquestions(request)
 	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
-	return render(request, 'askalma/listing.html' , context = context)
+	return response
+	#return render(request, 'askalma/listing.html' , context = context)
 
 def getquestions(request):
 	searchstring= str(request.GET.get('querystring', ' '))
@@ -247,3 +249,32 @@ def _get_user_profile (email):
 		"query_string": {"query": email, "default_field": 'email'}}})
 	#print res
 	return res['hits']['hits'][0]['_source']
+
+def interest(request):
+	context = {}
+	response = getinterests(request)
+	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
+	return response
+	#return render(request, 'askalma/listing.html' , context = context)
+
+def getinterests(request):
+	searchstring= str(request.GET.get('querystring', ' '))
+	print machineLearning(searchstring)
+	try:
+		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{ "query_string": { "query": searchstring, "default_field": 'title' }}})
+		result=result['hits']['hits']
+		print result
+		b=[]
+		for q in result:
+			tags= q['_source']['tags']
+			taglist= [s.strip() for s in tags.split(',')]
+			a = {
+			"title": q['_source']['title'],
+			"taglist": taglist,
+			"details": q['_source']["details"]
+			}
+			b.append(a)
+			print(b)
+		return JsonResponse({'questions': b })
+	except KeyError:
+		return JsonResponse({'questions': "nothing"})
