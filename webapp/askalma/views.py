@@ -15,7 +15,11 @@ import json
 from wordVectorClassifier import machineLearning
 import gdata.photos.service #In this example where contacting Google Picasa Web API
 from gensim.models import word2vec
-
+import watson_developer_cloud
+import watson_developer_cloud.natural_language_understanding.features.v1 as features
+nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(version='2017-05-11',
+                                                            username='92475337-a51a-47f2-b42e-69e772b1e3cc',
+															password='NdHjAGCYDeOf')
 
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
 				   use_ssl='true')
@@ -126,9 +130,22 @@ def pullquestion(request):
 		title= str(request.GET.get("title", ' '))
 		#print title
 		tags= str(request.GET.get("tags", ' '))
+		print("tags!!!!!!!!!!!!!!a;ldkfjasdf" + " " + tags)
 		#print tags
 		details= str(request.GET.get("details", ' '))
-
+		if title != " ":
+			categoryOutput = nlu.analyze(text=title, features=[features.Categories()])
+			if len(categoryOutput['categories']) != 0:
+				if tags != "":
+					tags = tags + ", " + categoryOutput['categories'][0]['label']
+				else:
+					tags = categoryOutput['categories'][0]['label']
+			keywordOutput = nlu.analyze(text=title, features=[features.Keywords()])
+			if len(keywordOutput['keywords']) != 0:
+				tags = tags + ", " + keywordOutput['keywords'][0]['text']
+			conceptOutput = nlu.analyze(text=title, features=[features.Concepts()])
+			if len(conceptOutput['concepts']) != 0:
+				tags = tags + ", " + conceptOutput['concepts'][0]['text']
 		#print details
 		#print "inside es working"
 		user_profile =_get_user_profile (request.session['email'])
@@ -153,9 +170,10 @@ def pullquestion(request):
 def profile (request):
 	result = _isLoggedIn(request)
 	if result != None: return result
-
-	user_info = _get_user_profile (request.session['email'])
-	context = {'user_info' : user_info}
+	context= {}
+	#user_info = _get_user_profile (request.session['email'])
+	#print user_info
+	#context = {'user_info' : user_info}
 	#print context
 	return render(request, 'askalma/profile.html' , context)
 
