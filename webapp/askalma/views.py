@@ -130,16 +130,24 @@ def pullquestion(request):
 		tags= str(request.GET.get("tags", ' '))
 		#print tags
 		details= str(request.GET.get("details", ' '))
+
 		#print details
 		#print "inside es working"
+		user_profile =_get_user_profile (request.session['email'])
+		user_email= user_profile['email']
+		user= es.search(index='users', body={"from" : 0, "size": 1000, "query":{ "query_string": {"query": user_email, "default_field": "email"}}})["hits"]["hits"]
+		for u in user:
+			user_id= u.get("_id")
+			es.update(index= 'users', doc_type="user", id= user_id, body= {"doc": {"user_questions": " "+title}})
 		doc = {
 			"title": title,
 			"tags": tags,
-			"details": details
+			"details": details,
+			"user_id":user_id
 		}
-		#print doc
 		if title!=" ":
 			es.index(index="questions1", doc_type='question', body=doc)
+			print doc
 		return HttpResponseRedirect("data")
 	except KeyError:
 		return HttpResponseRedirect("webpage")
