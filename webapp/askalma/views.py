@@ -12,9 +12,9 @@ from urlparse import urlparse
 import gdata.client
 import gdata.gauth
 import json
-# from wordVectorClassifier import machineLearning
+from wordVectorClassifier import machineLearning
 import gdata.photos.service #In this example where contacting Google Picasa Web API
-# from gensim.models import word2vec
+from gensim.models import word2vec
 
 
 es = Elasticsearch("search-askalma-ec4hakudbwu54iw5gnp6k6ggpy.us-east-1.es.amazonaws.com", port=443,
