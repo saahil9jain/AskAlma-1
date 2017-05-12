@@ -169,15 +169,13 @@ def pullquestion(request):
 	except KeyError:
 		return HttpResponseRedirect("webpage")
 
-def profile (request):
+def profile(request):
 	result = _isLoggedIn(request)
 	if result != None: return result
-	context= {}
-	#user_info = _get_user_profile (request.session['email'])
 	#print user_info
-	#context = {'user_info' : user_info}
 	#print context
-	return render(request, 'askalma/profile.html' , context)
+	context = {}
+	return render(request, 'askalma/profile.html' , context=context)
 
 def edit_profile (request ):
 	result = _isLoggedIn(request)
