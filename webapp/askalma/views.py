@@ -78,6 +78,7 @@ def listing(request):
 	result = _isLoggedIn(request)
 	if result != None: return result
 	response= searchquestion(request)
+	print(response)
 	return render(request, 'askalma/listing.html'  , context = response)
 
 
@@ -125,7 +126,7 @@ def pullquestion(request):
 		#print details
 		#print "inside es working"
 		user_profile =_get_user_profile (request.session['email'])
-		user_email= user_profile['email']
+		user_email= user_profile[0].get('email')
 		user= es.search(index='users', body={"from" : 0, "size": 1000, "query":{ "query_string": {"query": user_email, "default_field": "email"}}})["hits"]["hits"]
 		for u in user:
 			user_id= u.get("_id")
