@@ -259,22 +259,17 @@ def interest(request):
 
 def getinterests(request):
 	searchstring= str(request.GET.get('querystring', ' '))
-	print machineLearning(searchstring)
 	try:
-		result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{ "query_string": { "query": searchstring, "default_field": 'title' }}})
-		result=result['hits']['hits']
-		print result
-		b=[]
-		for q in result:
-			tags= q['_source']['tags']
-			taglist= [s.strip() for s in tags.split(',')]
+		response = machineLearning(searchstring)
+		recommendations = []
+		for i in range(len(response)):
 			a = {
-			"title": q['_source']['title'],
-			"taglist": taglist,
-			"details": q['_source']["details"]
+				"interest": response[i][0]
 			}
-			b.append(a)
-			print(b)
-		return JsonResponse({'questions': b })
+			recommendations.append(a)
+		print(recommendations)
+
+		# Delete bottom stuff
+		return JsonResponse({'interests': recommendations })
 	except KeyError:
-		return JsonResponse({'questions': "nothing"})
+		return JsonResponse({'interests': "nothing"})
