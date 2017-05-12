@@ -232,11 +232,17 @@ def _get_user_profile (email):
 	return res['hits']['hits'][0]['_source'], res['hits']['hits'][0]['_id']
 
 def interest(request):
-	context = {}
-	response = getinterests(request)
-	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
-	return response
-	#return render(request, 'askalma/listing.html' , context = context)
+	result = _isLoggedIn(request)
+	if result != None: return result
+	response= getinterests(request)
+	return render(request, 'askalma/index.html'  , context = response)
+
+# def interest(request):
+# 	context = {}
+# 	response = getinterests(request)
+# 	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
+# 	return response
+# 	#return render(request, 'askalma/listing.html' , context = context)
 
 def getinterests(request):
 	searchstring= str(request.GET.get('querystring', ' '))
@@ -251,9 +257,9 @@ def getinterests(request):
 		print(recommendations)
 
 		# Delete bottom stuff
-		return JsonResponse({'interests': recommendations })
+		return {'interests': recommendations }
 	except KeyError:
-		return JsonResponse({'interests': "nothing"})
+		return {'interests': "nothing"}
 
 @csrf_exempt
 def submit_answer(request):

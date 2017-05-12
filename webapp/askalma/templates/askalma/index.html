@@ -24,6 +24,7 @@
 				<input type="text" title="* Please enter an interest / topic" placeholder="Type your interest / topic here (1 word, lowercase please)" class="search-term " autocomplete="off" id="querystring" name="querystring">
 				<input type="submit" value="Search" class="search-btn" onclick="searchinterest()" value= "Senddata">
 			</form>
+			<p class="search-tag-line">Recommendations:{%  for interest in interests  %} {{ interest.interest }} , {% endfor %}</p>
 		</div>
 	</div>
 	<!-- =-=-=-=-=-=-= HOME END =-=-=-=-=-=-= -->
