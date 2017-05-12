@@ -46,11 +46,18 @@ def index(request):
 	return render(request, 'askalma/index.html', context=context)
 
 def search(request):
-	context = {}
-	response = getquestions(request)
-	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
-	return response
-	#return render(request, 'askalma/listing.html' , context = context)
+	result = _isLoggedIn(request)
+	if result != None: return result
+	response= getquestions(request)
+	print(response)
+	return render(request, 'askalma/listing.html'  , context = response)
+
+# def search(request):
+# 	context = {}
+# 	response = getquestions(request)
+# 	if response.get('questions') == "": return render(request, 'askalma/index.html', context=context)
+# 	return response
+# 	#return render(request, 'askalma/listing.html' , context = context)
 
 def getquestions(request):
 	searchstring= str(request.GET.get('querystring', ' '))
@@ -70,9 +77,9 @@ def getquestions(request):
 			}
 			b.append(a)
 			print(b)
-		return JsonResponse({'questions': b })
+		return {'questions': b }	
 	except KeyError:
-		return JsonResponse({'questions': "nothing"})
+		return {'questions': "nothing"}
 
 def listing(request):
 	result = _isLoggedIn(request)
@@ -80,7 +87,6 @@ def listing(request):
 	response= searchquestion(request)
 	print(response)
 	return render(request, 'askalma/listing.html'  , context = response)
-
 
 def searchquestion(request):
 	try:
