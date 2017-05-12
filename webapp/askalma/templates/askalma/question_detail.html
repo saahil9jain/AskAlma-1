@@ -18,38 +18,18 @@
               <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div id="title" method="get">
-                  <h3><a  href="#"> Bootstrap fixed sidebar causes main content to overlap ? </a></h3>
+                  <h3><a  href="/question-detail/{{ question.qid }}"> {{ question.title }} </a></h3>
                   </div>
-                  <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>8 mintes ago</span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> 750 Views</span> </div>
-                  <div id= "details" >
+<!--                  <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>8 mintes ago</span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> 750 Views</span> </div> -->                  <div id= "details" >
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                  <p > I am a novice when it comes to Bootstrap and css in general. I would like a site with a fixed sidebar, fixed top nav and main content that scrolls. </p>
+                  <p > <a href="/question-detail/{{ question.qid }}">
+                     {{ question.details }} </a> </p>
                 </div>
-                  <p>The navbar is fixed and works ok. The layout of the sidebar and main content is fine too. The problem comes when I set the sidebar to fixed. The main content overlaps the sidebar.</p>
-                  <p>I am using a basic grid layout:</p>
-                  <strong>Html Structure</strong>
-                  <pre class="brush: php; syntaxhighlight">
-<section class="row">
 
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-        </ul>
-    </div>
-
-    <div class="col-sm-9">
-        <h1 class="page-header">Dashboard</h1>
-    </div>
-</section>
-
- 								</pre>
-                  <p> I have tried adding a margin to the left of the main content to push it over but it looks horrible when resized to smaller device. </p>
-                  <p>What is the correct way to achieve a fixed sidebar whilst still maintaining responsiveness? </p>
                 </div>
-                  <div class="tagcloud"> <a href="" id="t1">html</a> <a href="" id="t2">css</a> <a href="" id="t3">bootstrap</a> </div>
+                {% for tag in taglist%}
+                  <div class="tagcloud"> <a href="/question-detail/{{ question.qid }}" id="t1">{{tag}}</a> <!--<a href="" id="t2">tag[1]</a> <a href="" id="t3">bootstrap</a>--> </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -58,9 +38,11 @@
             <div class="clearfix"></div>
             <!-- Thread Reply -->
             <div class="thread-reply">
-              <h2>Thread Reply </h2>
 
+              <h2>Thread Reply </h2>
+                                {% for answer in answers %}
               <!-- Reply Grid -->
+
               <div class="media-block card-box ribbon-content">
                 <div class="ribbon base"><span>Correct Answer</span>
                 </div>
@@ -74,10 +56,12 @@
                 </div>
                 <div class="media-body">
                   <div class="mar-btm">
-                    <h4><a href="#" class="btn-link text-semibold media-heading box-inline">Muhammad Umair</a></h4>
-                    <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
+                    <h4><a href="#" class="btn-link text-semibold media-heading box-inline">Anonymous</a></h4>
+                    <!-- <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p> -->
                   </div>
-                  <p>I think this is what you are looking for. You need to remove the <code>float: left</code> from the inner nav to center it and make it a inline-block.</p>
+
+                  <p>
+                    <!--I think this is what you are looking for. You need to remove the <code>float: left</code> from the inner nav to center it and make it a inline-block.</p>
                   <pre class="brush: php syntaxhighlight">
                         .navbar .navbar-nav {
                           display: inline-block;
@@ -102,8 +86,9 @@
                                 text-align: center;
                             }
                         }
-                                </pre>
-                  <div class="pad-ver pull-right">
+                      </pre> -->
+                      {{answer.answer_text}}
+<!--                  <div class="pad-ver pull-right">
 
                     <a class="btn btn-sm btn-default btn-hover-success" data-toggle="tooltip" data-placement="bottom" data-original-title="Like This Answer" href="#"><i class="fa fa-thumbs-up"></i></a>
                     <a class="btn btn-sm btn-default btn-hover-danger" href="#" data-original-title="Spam" data-placement="bottom" data-toggle="tooltip"><i class="fa fa-thumbs-down"></i></a>
@@ -111,10 +96,10 @@
                   </div>
 
                 </div>
-              </div>
+              </div> -->
               <!-- Reply Grid End -->
               <!-- Reply Grid -->
-              <div class="media-block card-box ">
+        <!--      <div class="media-block card-box ">
 
                 <div class="media-left">
                   <a href="#">
@@ -143,12 +128,12 @@ $('#nav').affix({
 
                     <a class="btn btn-sm btn-default btn-hover-primary" href="#">Mark As Correct</a>
                   </div>
-
+-->
                 </div>
               </div>
               <!-- Reply Grid End -->
               <!-- Reply Grid -->
-              <div class="media-block card-box ">
+<!--              <div class="media-block card-box ">
 
                 <div class="media-left">
                   <a href="#">
@@ -178,6 +163,8 @@ $(function(){
 
                 </div>
               </div>
+            -->
+              {% endfor %}
               <!-- Reply Grid End -->
 
               <div class="clearfix"></div>
@@ -198,9 +185,11 @@ $(function(){
           </div>
 
           <!-- Right Sidebar -->
-          <div class="col-md-4 col-sm-12 col-xs-12 clearfix">
+          <!--
+          <div class="col-md-4 col-sm-12 col-xs-12 clearfix"> -->
 
             <!-- sidebar -->
+            <!--
             <div class="side-bar">
               <div class="widget">
                 <div class="widget-image widget-image-sm"> <img alt="image" src="images/light-background.jpg">
@@ -233,6 +222,7 @@ $(function(){
             </div>
             <!-- sidebar end -->
           </div>
+        -->
           <!-- Right Sidebar End -->
 
         </div>

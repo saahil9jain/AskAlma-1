@@ -189,8 +189,15 @@ def _get_question_details( qid):
 	query = es.get(index="questions1", doc_type='question' , id=qid)
 	question = query ['_source']
 	question['id']  = query['_id']
+	tags= question['tags']
+	taglist= [s.strip() for s in tags.split(',')]
+	print taglist
+	print "first tag"
+	print taglist[0]
+	print "second tag"
 	#answers = es.search ("doc is query for questions = qid ")
 	answers= es.search(index='answers3', body={"from" : 0, "size" : 1000,"query":{ "query_string": { "query": question['id'] , "default_field": 'question_id' }}})
+	print answers
 	answers=answers['hits']['hits']
 	b=[]
 	for answer in answers:
@@ -198,9 +205,21 @@ def _get_question_details( qid):
 		a={}
 		a['answer_text'] = source.get('answer_text')
 		a['user_id'] = source.get('user_id')
+		users= es.search(index= 'users',body={"from" : 0, "size" : 1000,"query":{"match_all": {}}})["hits"]["hits"]
+		#result=es.search(index='questions1', body={"from" : 0, "size" : 1000, "query":{"match_all": {}}})
+		print "This are users"
+		print users
+		for user in users:
+			id= user.get('_id')
+			if a['user_id']==id:
+				source1 = user.get('_source')
+				a['firstname']= source1.get('firstname')
+				a['lastname']= source1.get('lastname')
 		b.append(a)
-	answers = None
-	return {'question' : question , 'answers' : b}
+	print ("This are the answers and users")
+	print b
+	#answers = None
+	return {'question' : question , 'answers' : b, 'taglist': taglist}
 
 #JUST UNCOMMENT the two lines
 def _getStats ():
