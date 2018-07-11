@@ -1,12 +1,10 @@
-# Cloud-Computing
+Ask Alma
 
-Team Name: NullPointers
-
-Project Title: Ask Alma
+A Quora-like question and discussion platform built for Columbia students. This platform includes ML-driven features like topic recommendations. This is the second version of my (Saahil's) initial Ask Alma venture. 
 
 Team Members:
-Lakshmi Bodapati (lmb2254),
-Hamza Jazmati (hz2441),
-Saahil Jain (sj2675),
-Sachchidanand Deo (ssd2149)
+Lakshmi Bodapati,
+Hamza Jazmati,
+Saahil Jain,
+Sachchidanand Deo
 
